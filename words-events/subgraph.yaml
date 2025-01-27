@@ -1,0 +1,32 @@
+specVersion: 1.0.0
+indexerHints:
+  prune: auto
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: Prompt
+    network: base-sepolia
+    source:
+      address: "0xedD5B28C1bdc1258f9043c9ca37d9f76525786b0"
+      abi: Prompt
+      startBlock: 21075771
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - OwnershipTransferred
+        - PromptCompleted
+        - WordUpdated
+      abis:
+        - name: Prompt
+          file: ./abis/Prompt.json
+      eventHandlers:
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: PromptCompleted(indexed uint256,string[],address[],string)
+          handler: handlePromptCompleted
+        - event: WordUpdated(indexed uint256,string,indexed address,indexed address,uint256,uint256)
+          handler: handleWordUpdated
+      file: ./src/prompt.ts
