@@ -1,4 +1,4 @@
-import { Bytes } from "@graphprotocol/graph-ts";
+import { Address, Bytes } from "@graphprotocol/graph-ts";
 import {
   EditionCompleted as EditionCompletedEvent,
   OwnershipTransferred as OwnershipTransferredEvent,
@@ -17,8 +17,8 @@ export function handleEditionCompleted(event: EditionCompletedEvent): void {
   entity.editionNumber = event.params.editionNumber;
   entity.words = event.params.words;
 
-  // Convert address[] to Bytes[]
-  entity.owners = event.params.owners.map((owner) =>
+  // Convert address[] to Bytes[] with explicit type
+  entity.owners = event.params.owners.map<Bytes>((owner) =>
     Bytes.fromHexString(owner.toHexString())
   );
 
