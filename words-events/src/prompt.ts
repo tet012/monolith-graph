@@ -30,11 +30,15 @@ export function handlePromptCompleted(event: PromptCompletedEvent): void {
   let entity = new PromptCompleted(
     event.transaction.hash.concatI32(event.logIndex.toI32())
   );
+
   entity.editionNumber = event.params.editionNumber;
   entity.words = event.params.words;
-  entity.owners = changetype<Bytes[]>(event.params.owners);
-  entity.imageUri = event.params.imageUri;
 
+  entity.owners = event.params.owners.map((owner) =>
+    Bytes.fromHexString(owner.toHexString())
+  );
+
+  entity.imageUri = event.params.imageUri;
   entity.blockNumber = event.block.number;
   entity.blockTimestamp = event.block.timestamp;
   entity.transactionHash = event.transaction.hash;
