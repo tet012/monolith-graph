@@ -16,11 +16,14 @@ export function handleEditionCompleted(event: EditionCompletedEvent): void {
   );
   entity.editionNumber = event.params.editionNumber;
   entity.words = event.params.words;
-  entity.owners = [];
+
+  // Convert owners array to Bytes array
+  let ownersList: Bytes[] = [];
   for (let i = 0; i < event.params.owners.length; i++) {
-    let owner = event.params.owners[i];
-    entity.owners.push(owner as Bytes);
+    ownersList.push(event.params.owners[i]);
   }
+  entity.owners = ownersList;
+
   entity.imageUri = event.params.imageUri;
   entity.timestamp = event.params.timestamp;
 
