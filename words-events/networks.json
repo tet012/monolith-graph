@@ -1,8 +1,0 @@
-{
-  "base-sepolia": {
-    "rePrompt2": {
-      "address": "0x8025E6F082ac1ad0563Ae710929f5dC2964451eb",
-      "startBlock": 21099687
-    }
-  }
-}

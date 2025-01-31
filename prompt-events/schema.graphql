@@ -3,8 +3,6 @@ type EditionCompleted @entity(immutable: true) {
   editionNumber: BigInt! # uint256
   words: [String!]! # string[24]
   owners: [Bytes!]! # address[24]
-  imageUri: String! # string
-  timestamp: BigInt! # uint256
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
@@ -21,13 +19,11 @@ type OwnershipTransferred @entity(immutable: true) {
 
 type WordUpdated @entity(immutable: true) {
   id: Bytes!
-  editionNumber: BigInt! # uint256
   wordId: BigInt! # uint256
   newWord: String! # string
-  previousOwner: Bytes! # address
   newOwner: Bytes! # address
-  paidPrice: BigInt! # uint256
   newPrice: BigInt! # uint256
+  updateCount: BigInt! # uint256
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!

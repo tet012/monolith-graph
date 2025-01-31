@@ -4,14 +4,12 @@ import {
   EditionCompleted,
   OwnershipTransferred,
   WordUpdated
-} from "../generated/rePrompt2/rePrompt2"
+} from "../generated/rePrompt3/rePrompt3"
 
 export function createEditionCompletedEvent(
   editionNumber: BigInt,
   words: Array<string>,
-  owners: Array<Address>,
-  imageUri: string,
-  timestamp: BigInt
+  owners: Array<Address>
 ): EditionCompleted {
   let editionCompletedEvent = changetype<EditionCompleted>(newMockEvent())
 
@@ -28,15 +26,6 @@ export function createEditionCompletedEvent(
   )
   editionCompletedEvent.parameters.push(
     new ethereum.EventParam("owners", ethereum.Value.fromAddressArray(owners))
-  )
-  editionCompletedEvent.parameters.push(
-    new ethereum.EventParam("imageUri", ethereum.Value.fromString(imageUri))
-  )
-  editionCompletedEvent.parameters.push(
-    new ethereum.EventParam(
-      "timestamp",
-      ethereum.Value.fromUnsignedBigInt(timestamp)
-    )
   )
 
   return editionCompletedEvent
@@ -65,24 +54,16 @@ export function createOwnershipTransferredEvent(
 }
 
 export function createWordUpdatedEvent(
-  editionNumber: BigInt,
   wordId: BigInt,
   newWord: string,
-  previousOwner: Address,
   newOwner: Address,
-  paidPrice: BigInt,
-  newPrice: BigInt
+  newPrice: BigInt,
+  updateCount: BigInt
 ): WordUpdated {
   let wordUpdatedEvent = changetype<WordUpdated>(newMockEvent())
 
   wordUpdatedEvent.parameters = new Array()
 
-  wordUpdatedEvent.parameters.push(
-    new ethereum.EventParam(
-      "editionNumber",
-      ethereum.Value.fromUnsignedBigInt(editionNumber)
-    )
-  )
   wordUpdatedEvent.parameters.push(
     new ethereum.EventParam("wordId", ethereum.Value.fromUnsignedBigInt(wordId))
   )
@@ -90,24 +71,18 @@ export function createWordUpdatedEvent(
     new ethereum.EventParam("newWord", ethereum.Value.fromString(newWord))
   )
   wordUpdatedEvent.parameters.push(
-    new ethereum.EventParam(
-      "previousOwner",
-      ethereum.Value.fromAddress(previousOwner)
-    )
-  )
-  wordUpdatedEvent.parameters.push(
     new ethereum.EventParam("newOwner", ethereum.Value.fromAddress(newOwner))
-  )
-  wordUpdatedEvent.parameters.push(
-    new ethereum.EventParam(
-      "paidPrice",
-      ethereum.Value.fromUnsignedBigInt(paidPrice)
-    )
   )
   wordUpdatedEvent.parameters.push(
     new ethereum.EventParam(
       "newPrice",
       ethereum.Value.fromUnsignedBigInt(newPrice)
+    )
+  )
+  wordUpdatedEvent.parameters.push(
+    new ethereum.EventParam(
+      "updateCount",
+      ethereum.Value.fromUnsignedBigInt(updateCount)
     )
   )
 
