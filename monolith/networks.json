@@ -1,0 +1,8 @@
+{
+  "base-sepolia": {
+    "rePrompt3": {
+      "address": "0x7eA5D982237Ee78D0b03B862A472b92aFC8775DB",
+      "startBlock": 21273339
+    }
+  }
+}
